@@ -7,7 +7,7 @@ Python implementation of the SWARII algorithm from _Audiffren & Contal (2016)_, 
 The original paper erroneously defines the _Relevance Interval_ (RI), which is the key contribution compared to the Sliding Window Average Interpolation (`SWAI`) method. The article states the following.
 
 _Relevance Interval_. Let $s$ be a time instant, $\Delta$ be a time duration and
-$$T_s(\Delta) = \left\{t \in T , |t − s| ≤ \Delta \right\}$$
+$T_s(\Delta) = \{t \in T , |t − s| ≤ \Delta \}$
 be a window centered around $s$. We denote by $t_p, . . . , t_q$ the ordered timestamps in $T_s(\Delta)$. Then, for every $t_i \in T_s(\Delta)$ we define $I_{T_s}(\Delta)(t_i)$ the relevance interval of $t_i$ in the window:
 
 $$
