@@ -109,7 +109,7 @@ class SWARII:
 
             # Get relevance interval (RI)
             RI = [
-                self._t[i] for i in range(len(self._t))
+                i for i in range(len(self._t))
                 if abs(self._t[i]-s) < delta
             ]
 
@@ -118,27 +118,28 @@ class SWARII:
                 value = np.zeros((1, self._s.shape[1]))
 
                 # Compute the signal value at time s, using the RI
-                for i, t_i in enumerate(RI):
+                for i in RI:
 
                     # Left border case
-                    if i == 0:
-                        I = 0.5*(RI[i+1]+t_i) - (s-delta)
+                    if i == RI[0]:
+                        I = 0.5*(self._t[i+1]+self._t[i]) - (s-delta)
                     # Right border case
-                    elif i == len(RI)-1:
-                        I = (s+delta) - 0.5*(t_i+RI[i-1])
+                    elif i == RI[-1]:
+                        I = (s+delta) - 0.5*(self._t[i]+self._t[i-1])
                     # Other cases
                     else:
-                        I = 0.5*(RI[i+1]-RI[i-1])
+                        I = 0.5*(self._t[i+1]-self._t[i-1])
 
                     norm += I
-                    value += self._s[np.where(self._t == t_i)] * I
+                    value += self._s[i] * I
 
             else:
                 if len(RI) == 0:
                     s += 1./self.fs
                     continue
                 if len(RI) == 1:
-                    value = self._s[np.where(self._t == RI[0])]
+                    value = np.zeros((1, self._s.shape[1]))
+                    value += self._s[RI[0]]
                     norm = 1
 
             value /= norm
