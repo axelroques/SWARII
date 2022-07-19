@@ -76,7 +76,6 @@ class SWARII:
                     label=f'Resampled {self.data.columns[i+1]}',
                     c='crimson', alpha=0.8)
             ax.legend()
-            ax.set_ylim((-40, 40))
 
         plt.tight_layout()
         plt.show()
